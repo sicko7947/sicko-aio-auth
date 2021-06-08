@@ -3,7 +3,6 @@ package auth
 import (
 	"context"
 	"encoding/base64"
-	"fmt"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware/util/metautils"
 	"github.com/sicko7947/sicko-aio-auth/constants"
@@ -20,7 +19,6 @@ var (
 // AuthInterceptor 认证拦截器，对以authorization为头部
 func AuthInterceptor(ctx context.Context) (context.Context, error) {
 	vBase64 := metautils.ExtractIncoming(ctx).Get(headerAuthorize)
-	fmt.Println(vBase64)
 	if vBase64 == "" {
 		return nil, status.Errorf(codes.Unauthenticated, " Unauthorized")
 	}

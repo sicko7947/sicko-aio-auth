@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"encoding/base64"
 	"fmt"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware/util/metautils"
@@ -18,19 +19,19 @@ var (
 
 // AuthInterceptor 认证拦截器，对以authorization为头部
 func AuthInterceptor(ctx context.Context) (context.Context, error) {
-	value := metautils.ExtractIncoming(ctx).Get(headerAuthorize)
-	fmt.Println(value)
-	if value == "" {
+	vBase64 := metautils.ExtractIncoming(ctx).Get(headerAuthorize)
+	fmt.Println(vBase64)
+	if vBase64 == "" {
 		return nil, status.Errorf(codes.Unauthenticated, " Unauthorized")
 	}
 
-	key, err := sickocommon.RsaDecrypt([]byte(value), []byte(constants.AUTH_PRIVATE_KEY))
+	value, _ := base64.StdEncoding.DecodeString(vBase64)
+	key, err := sickocommon.RsaDecrypt(value, []byte(constants.AUTH_PRIVATE_KEY))
 	if err != nil {
+		fmt.Println(err)
 		return nil, status.Errorf(codes.Unauthenticated, " %v", err)
 	}
-
 	fmt.Println(string(key))
-
 	err = redis.CheckKeyExist(string(key))
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, " %v", err)

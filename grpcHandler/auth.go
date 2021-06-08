@@ -1,6 +1,7 @@
 package grpcHandler
 
 import (
+	"fmt"
 	"io"
 
 	"github.com/sicko7947/sicko-aio-auth/postgresql"
@@ -11,12 +12,15 @@ func (s *streamService) Auth(srv auth_service.Stream_AuthServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
+			fmt.Println("EOF")
 			return nil
 		}
 		if err != nil {
+			fmt.Println(err)
 			return err
 		}
 
+		fmt.Println("aaaaaaaaaaa")
 		key := req.GetKey()
 		ipaddress := req.GetIpaddress()
 		macaddress := req.GetMacaddress()

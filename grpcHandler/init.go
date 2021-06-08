@@ -5,12 +5,10 @@ import (
 	"net"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
 	grpc_validator "github.com/grpc-ecosystem/go-grpc-middleware/validator"
 	"github.com/shimingyah/pool"
-	"github.com/sicko7947/sicko-aio-auth/grpcHandler/middleware/auth"
 	"github.com/sicko7947/sicko-aio-auth/grpcHandler/middleware/cred"
 	"github.com/sicko7947/sicko-aio-auth/grpcHandler/middleware/recovery"
 	"github.com/sicko7947/sicko-aio-auth/grpcHandler/middleware/zap"
@@ -37,13 +35,13 @@ func StargrpcServer(port string) {
 		grpc.StreamInterceptor(grpc_middleware.ChainStreamServer(
 			grpc_validator.StreamServerInterceptor(),
 			grpc_zap.StreamServerInterceptor(zap.ZapInterceptor()),
-			grpc_auth.StreamServerInterceptor(auth.AuthInterceptor),
+			// grpc_auth.StreamServerInterceptor(auth.AuthInterceptor),
 			grpc_recovery.StreamServerInterceptor(recovery.RecoveryInterceptor()),
 		)),
 		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
 			grpc_validator.UnaryServerInterceptor(),
 			grpc_zap.UnaryServerInterceptor(zap.ZapInterceptor()),
-			grpc_auth.UnaryServerInterceptor(auth.AuthInterceptor),
+			// grpc_auth.UnaryServerInterceptor(auth.AuthInterceptor),
 			grpc_recovery.UnaryServerInterceptor(recovery.RecoveryInterceptor()),
 		)),
 

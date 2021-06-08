@@ -18,6 +18,7 @@ require (
 	github.com/kisielk/gotool v1.0.0 // indirect
 	github.com/lib/pq v1.10.2 // indirect
 	github.com/matryer/respond v1.0.1 // indirect
+	github.com/mattn/go-sqlite3 v1.14.7 // indirect
 	github.com/refraction-networking/utls v0.0.0-20201210053706-2179f286686b // indirect
 	github.com/shimingyah/pool v0.0.0-20190724082523-04bd98b0fbfe // indirect
 	github.com/sicko7947/sickocommon v0.0.0-20210608054118-056616440ec3 // indirect

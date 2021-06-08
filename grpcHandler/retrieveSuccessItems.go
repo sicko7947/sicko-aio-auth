@@ -3,11 +3,11 @@ package grpcHandler
 import (
 	"io"
 
-	"github.com/JasonCai686/sicko-aio-auth/postgresql"
-	grpc_service "github.com/JasonCai686/sicko-aio-auth/proto/rpc"
+	"github.com/sicko7947/sicko-aio-auth/postgresql"
+	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
 )
 
-func (s *streamService) RetrieveSuccess(srv grpc_service.Stream_RetrieveSuccessServer) error {
+func (s *streamService) RetrieveSuccess(srv auth_service.Stream_RetrieveSuccessServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
@@ -21,7 +21,7 @@ func (s *streamService) RetrieveSuccess(srv grpc_service.Stream_RetrieveSuccessS
 		keyId := req.GetKeyId()
 		successItems := postgresql.RetrieveSuccess(keyId)
 
-		srv.Send(&grpc_service.StreamRetrieveSuccessItemsResponse{
+		srv.Send(&auth_service.StreamRetrieveSuccessItemsResponse{
 			SuccessItems: successItems,
 		})
 	}

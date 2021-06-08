@@ -1,10 +1,11 @@
 package grpcHandler
 
 import (
-	grpc_service "github.com/JasonCai686/sicko-aio-auth/proto/rpc"
+	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
+	"github.com/sicko7947/sicko-aio-auth/utils"
 )
 
-func (s *streamService) RequestCookieData(srv grpc_service.Stream_RequestCookieDataServer) error {
+func (s *streamService) RequestCookieData(srv auth_service.Stream_RequestCookieDataServer) error {
 	for {
 		_, err := srv.Recv()
 		if err != nil {
@@ -13,13 +14,13 @@ func (s *streamService) RequestCookieData(srv grpc_service.Stream_RequestCookieD
 
 		data := utils.GetCookie2FromRedis()
 		if len(data) > 0 {
-			srv.Send(&grpc_service.StreamGetCookieDataResponse{
+			srv.Send(&auth_service.StreamGetCookieDataResponse{
 				Data:   data,
 				Errors: nil,
 			})
 		} else {
-			srv.Send(&grpc_service.StreamGetCookieDataResponse{
-				Errors: &grpc_service.Errors{
+			srv.Send(&auth_service.StreamGetCookieDataResponse{
+				Errors: &auth_service.Errors{
 					Code:    400,
 					Message: "Error Getting Sicko Cookies",
 				},

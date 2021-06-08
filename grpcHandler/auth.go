@@ -3,11 +3,11 @@ package grpcHandler
 import (
 	"io"
 
-	"github.com/JasonCai686/sicko-aio-auth/postgresql"
-	grpc_service "github.com/JasonCai686/sicko-aio-auth/proto/rpc"
+	"github.com/sicko7947/sicko-aio-auth/postgresql"
+	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
 )
 
-func (s *streamService) Auth(srv grpc_service.Stream_AuthServer) error {
+func (s *streamService) Auth(srv auth_service.Stream_AuthServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
@@ -22,7 +22,7 @@ func (s *streamService) Auth(srv grpc_service.Stream_AuthServer) error {
 		macaddress := req.GetMacaddress()
 		timestamp := req.GetTimestamp()
 
-		response := new(grpc_service.StreamAuthResponse)
+		response := new(auth_service.StreamAuthResponse)
 		code, err := postgresql.Login(key, ipaddress, macaddress, timestamp)
 		if err != nil || code != postgresql.OK {
 			response.Code = int64(code)
@@ -34,7 +34,7 @@ func (s *streamService) Auth(srv grpc_service.Stream_AuthServer) error {
 	}
 }
 
-func (s *streamService) Deactivate(srv grpc_service.Stream_DeactivateServer) error {
+func (s *streamService) Deactivate(srv auth_service.Stream_DeactivateServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
@@ -46,7 +46,7 @@ func (s *streamService) Deactivate(srv grpc_service.Stream_DeactivateServer) err
 
 		key := req.GetKey()
 
-		response := new(grpc_service.StreamDeactivateResponse)
+		response := new(auth_service.StreamDeactivateResponse)
 		code, err := postgresql.Deactivate(key)
 		if err != nil || code != postgresql.OK {
 			response.Code = int64(code)
@@ -58,7 +58,7 @@ func (s *streamService) Deactivate(srv grpc_service.Stream_DeactivateServer) err
 	}
 }
 
-func (s *streamService) Polling(srv grpc_service.Stream_PollingServer) error {
+func (s *streamService) Polling(srv auth_service.Stream_PollingServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
@@ -70,7 +70,7 @@ func (s *streamService) Polling(srv grpc_service.Stream_PollingServer) error {
 
 		key := req.GetKey()
 
-		response := new(grpc_service.StreamPollingResponse)
+		response := new(auth_service.StreamPollingResponse)
 		code, err := postgresql.Deactivate(key)
 		if err != nil || code != postgresql.OK {
 			response.Code = int64(code)

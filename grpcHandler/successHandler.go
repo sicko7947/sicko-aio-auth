@@ -6,6 +6,7 @@ import (
 	"github.com/gogf/gf/container/gqueue"
 	"github.com/sicko7947/sicko-aio-auth/models"
 	"github.com/sicko7947/sicko-aio-auth/postgresql"
+	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
 	"github.com/sicko7947/sicko-aio-auth/utils/webhook"
 )
 
@@ -55,7 +56,7 @@ func init() {
 	}()
 }
 
-func (s *streamService) HandleSuccessCheckout(srv grpc_service.Stream_HandleSuccessCheckoutServer) error {
+func (s *streamService) HandleSuccessCheckout(srv auth_service.Stream_HandleSuccessCheckoutServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
@@ -87,7 +88,7 @@ func (s *streamService) HandleSuccessCheckout(srv grpc_service.Stream_HandleSucc
 		}
 		successDBQueue.Push(successItem)
 
-		srv.Send(&grpc_service.StreamHandleSuccessCheckoutResponse{
+		srv.Send(&auth_service.StreamHandleSuccessCheckoutResponse{
 			Success: true,
 			Errors:  nil,
 		})

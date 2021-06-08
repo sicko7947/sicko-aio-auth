@@ -7,7 +7,7 @@ import (
 	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
 )
 
-func (s *streamService) RetrieveSuccess(srv auth_service.Stream_RetrieveSuccessServer) error {
+func (s *streamService) RetrieveSuccess(srv auth_service.AuthStream_RetrieveSuccessServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {

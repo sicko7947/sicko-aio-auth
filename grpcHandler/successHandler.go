@@ -56,7 +56,7 @@ func init() {
 	}()
 }
 
-func (s *streamService) HandleSuccessCheckout(srv auth_service.Stream_HandleSuccessCheckoutServer) error {
+func (s *streamService) HandleSuccessCheckout(srv auth_service.AuthStream_HandleSuccessCheckoutServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
@@ -90,7 +90,6 @@ func (s *streamService) HandleSuccessCheckout(srv auth_service.Stream_HandleSucc
 
 		srv.Send(&auth_service.StreamHandleSuccessCheckoutResponse{
 			Success: true,
-			Errors:  nil,
 		})
 	}
 }

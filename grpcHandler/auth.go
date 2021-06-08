@@ -8,7 +8,7 @@ import (
 	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
 )
 
-func (s *streamService) Auth(srv auth_service.Stream_AuthServer) error {
+func (s *streamService) Auth(srv auth_service.AuthStream_AuthServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
@@ -38,7 +38,7 @@ func (s *streamService) Auth(srv auth_service.Stream_AuthServer) error {
 	}
 }
 
-func (s *streamService) Deactivate(srv auth_service.Stream_DeactivateServer) error {
+func (s *streamService) Deactivate(srv auth_service.AuthStream_DeactivateServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {
@@ -62,7 +62,7 @@ func (s *streamService) Deactivate(srv auth_service.Stream_DeactivateServer) err
 	}
 }
 
-func (s *streamService) Polling(srv auth_service.Stream_PollingServer) error {
+func (s *streamService) Polling(srv auth_service.AuthStream_PollingServer) error {
 	for {
 		req, err := srv.Recv()
 		if err == io.EOF {

@@ -58,7 +58,7 @@ func StargrpcServer(port string) {
 			Timeout: pool.KeepAliveTimeout,
 		}),
 	)
-	auth_service.RegisterStreamServer(AuthServer, &streamService{})
+	auth_service.RegisterAuthStreamServer(AuthServer, &streamService{})
 	log.Println(port + " HTTP.Listing whth TLS and token...")
 	err = AuthServer.Serve(listener)
 	if err != nil {

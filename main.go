@@ -11,5 +11,5 @@ import (
 func main() {
 	port, _ := strconv.ParseInt(os.Args[1], 10, 64)
 	portString := fmt.Sprintf(":%v", port)
-	go grpcHandler.StargrpcServer(portString)
+	grpcHandler.StargrpcServer(portString)
 }

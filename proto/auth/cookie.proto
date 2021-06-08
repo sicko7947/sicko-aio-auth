@@ -1,13 +1,10 @@
 syntax = "proto3";
 package protobuf;
-
 option go_package = "auth;auth_service";
-import "auth/errors.proto";
 
 message StreamGetCookieDataRequest{
 }
 
 message StreamGetCookieDataResponse{
     string data = 1;
-    Errors errors = 2;
 }

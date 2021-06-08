@@ -8,7 +8,7 @@ import "auth/handleSuccess.proto";
 import "auth/retrieveSuccess.proto";
 
 
-service Stream{
+service AuthStream{
     rpc Auth(stream StreamAuthRequest) returns(stream StreamAuthResponse){};
     rpc Deactivate(stream StreamDeactivateRequest) returns(stream StreamDeactivateResponse){};
     rpc Polling(stream StreamPollingRequest) returns(stream StreamPollingResponse){};

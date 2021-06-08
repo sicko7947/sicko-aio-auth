@@ -1,7 +1,6 @@
 syntax = "proto3";
 package protobuf;
 option go_package = "auth;auth_service";
-import "auth/errors.proto";
 
 message SuccessProduct {
     string merchGroup = 1;
@@ -38,5 +37,4 @@ message StreamHandleSuccessCheckoutRequest{
 
 message StreamHandleSuccessCheckoutResponse{
     bool success = 1;
-    Errors errors = 2;
 }

@@ -3,10 +3,10 @@ package postgresql
 import (
 	"fmt"
 
-	grpc_service "github.com/JasonCai686/sicko-aio-auth/proto/rpc"
+	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
 )
 
-func RetrieveSuccess(key string) (results []*grpc_service.StreamRetrieveSuccessItemsResponse_SuccessItem) {
+func RetrieveSuccess(key string) (results []*auth_service.StreamRetrieveSuccessItemsResponse_SuccessItem) {
 	var successItems []*successItem
 
 	query := fmt.Sprintf(`
@@ -22,7 +22,7 @@ func RetrieveSuccess(key string) (results []*grpc_service.StreamRetrieveSuccessI
 	eg.SQL(query).Find(&successItems)
 
 	for _, item := range successItems {
-		results = append(results, &grpc_service.StreamRetrieveSuccessItemsResponse_SuccessItem{
+		results = append(results, &auth_service.StreamRetrieveSuccessItemsResponse_SuccessItem{
 			Category:    item.Category,
 			Region:      item.Region,
 			ProductSku:  item.ProductSku,

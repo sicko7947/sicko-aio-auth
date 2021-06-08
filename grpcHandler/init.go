@@ -4,15 +4,15 @@ import (
 	"log"
 	"net"
 
-	"github.com/JasonCai686/sicko-aio-auth/grpcHandler/middleware/cred"
-	"github.com/JasonCai686/sicko-aio-auth/grpcHandler/middleware/recovery"
-	"github.com/JasonCai686/sicko-aio-auth/grpcHandler/middleware/zap"
-	grpc_service "github.com/JasonCai686/sicko-aio-auth/proto/rpc"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
 	grpc_validator "github.com/grpc-ecosystem/go-grpc-middleware/validator"
 	"github.com/shimingyah/pool"
+	"github.com/sicko7947/sicko-aio-auth/grpcHandler/middleware/cred"
+	"github.com/sicko7947/sicko-aio-auth/grpcHandler/middleware/recovery"
+	"github.com/sicko7947/sicko-aio-auth/grpcHandler/middleware/zap"
+	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 )
@@ -69,7 +69,7 @@ func StargrpcServer(port string) {
 			Timeout: pool.KeepAliveTimeout,
 		}),
 	)
-	grpc_service.RegisterStreamServer(GrpcServer, &streamService{})
+	auth_service.RegisterStreamServer(GrpcServer, &streamService{})
 	log.Println(port + " HTTP.Listing whth TLS and token...")
 	err = GrpcServer.Serve(listener)
 	if err != nil {

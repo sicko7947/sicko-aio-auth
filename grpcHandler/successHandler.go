@@ -3,11 +3,10 @@ package grpcHandler
 import (
 	"io"
 
-	"github.com/JasonCai686/sicko-aio-auth/models"
-	"github.com/JasonCai686/sicko-aio-auth/postgresql"
-	grpc_service "github.com/JasonCai686/sicko-aio-auth/proto/rpc"
-	"github.com/JasonCai686/sicko-aio-auth/utils/webhook"
 	"github.com/gogf/gf/container/gqueue"
+	"github.com/sicko7947/sicko-aio-auth/models"
+	"github.com/sicko7947/sicko-aio-auth/postgresql"
+	"github.com/sicko7947/sicko-aio-auth/utils/webhook"
 )
 
 var (

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/sicko7947/sicko-aio-auth/models"
 )
 
 func InsertSuccess(successItem *models.SuccessItem) (err error) {

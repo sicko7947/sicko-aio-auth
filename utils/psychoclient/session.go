@@ -6,13 +6,13 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"sicko-aio-auth/models"
 	"strings"
 	"sync"
 
 	"github.com/gogf/gf/container/gmap"
 	"github.com/google/uuid"
 	tls "github.com/refraction-networking/utls"
+	"github.com/sicko7947/sicko-aio-auth/models"
 )
 
 // Session interface allows operating a psycho client session

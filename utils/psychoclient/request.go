@@ -4,9 +4,9 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
-	"sicko-aio-auth/models"
 
 	tls "github.com/refraction-networking/utls"
+	"github.com/sicko7947/sicko-aio-auth/models"
 )
 
 type Client struct {

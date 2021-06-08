@@ -8,6 +8,8 @@ import (
 	"time"
 
 	"github.com/brianvoe/gofakeit/v6"
+	"github.com/sicko7947/sicko-aio-auth/models"
+	"github.com/sicko7947/sicko-aio-auth/utils/psychoclient"
 )
 
 var (

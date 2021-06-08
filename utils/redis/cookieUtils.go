@@ -1,6 +1,7 @@
-package utils
+package redis
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -8,13 +9,13 @@ import (
 )
 
 // GetCookie2FromRedis : Get Single bm_sz Cookie From Redis
-func GetCookie2FromRedis() string {
+func GetCookieFromRedis() string {
 	con := pool.Get()
 	defer con.Close()
 
-	cookieList, err := redis.Strings(con.Do("ZRANGE", "cookie2", "0", "1"))
+	cookieList, err := redis.Strings(con.Do("ZRANGE", "cookie2", "0", "0"))
 	if len(cookieList) > 0 {
-		res, _ := redis.Int64(con.Do("ZREM", "cookie2", cookieList[0]))
+		res, _ := redis.Int64(con.Do("ZREM", "cookie", cookieList[0]))
 		if res > 0 {
 			return cookieList[0]
 		}
@@ -27,12 +28,12 @@ func GetCookie2FromRedis() string {
 }
 
 // SaveCookie2ToRedis : Save _abck To Redis
-func SaveCookie2ToRedis(expiry float64, cookie string) error {
+func SaveCookieToRedis(expiry float64, cookie string) error {
 	con := pool.Get()
 	defer con.Close()
 
 	expiryStr := fmt.Sprintf("%f", expiry)
-	_, err := redis.Int64(con.Do("ZADD", "cookie2", expiryStr, cookie))
+	_, err := redis.Int64(con.Do("ZADD", "cookie", expiryStr, cookie))
 	if err != nil {
 		return err
 	}
@@ -46,4 +47,19 @@ func CheckExpireCookieInRedis() {
 
 	timestamp := fmt.Sprintf(`%d`, time.Now().Unix())
 	redis.Int64(con.Do("ZREMRANGEBYSCORE", "cookie2", "0", timestamp))
+}
+
+// CheckKeyExist : Check Key Exist
+func CheckKeyExist(key string) error {
+	con := pool.Get()
+	defer con.Close()
+
+	res, err := redis.Int64(con.Do("EXISTS", key))
+	if err != nil {
+		return err
+	}
+	if res == 1 {
+		return nil
+	}
+	return errors.New("Key not found")
 }

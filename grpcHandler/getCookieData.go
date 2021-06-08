@@ -2,7 +2,7 @@ package grpcHandler
 
 import (
 	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
-	"github.com/sicko7947/sicko-aio-auth/utils"
+	"github.com/sicko7947/sicko-aio-auth/utils/redis"
 )
 
 func (s *streamService) RequestCookieData(srv auth_service.Stream_RequestCookieDataServer) error {
@@ -12,7 +12,7 @@ func (s *streamService) RequestCookieData(srv auth_service.Stream_RequestCookieD
 			return err
 		}
 
-		data := utils.GetCookie2FromRedis()
+		data := redis.GetCookieFromRedis()
 		if len(data) > 0 {
 			srv.Send(&auth_service.StreamGetCookieDataResponse{
 				Data:   data,

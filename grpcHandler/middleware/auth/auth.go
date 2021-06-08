@@ -28,10 +28,8 @@ func AuthInterceptor(ctx context.Context) (context.Context, error) {
 	value, _ := base64.StdEncoding.DecodeString(vBase64)
 	key, err := sickocommon.RsaDecrypt(value, []byte(constants.AUTH_PRIVATE_KEY))
 	if err != nil {
-		fmt.Println(err)
 		return nil, status.Errorf(codes.Unauthenticated, " %v", err)
 	}
-	fmt.Println(string(key))
 	err = redis.CheckKeyExist(string(key))
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, " %v", err)

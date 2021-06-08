@@ -13,7 +13,7 @@ func Deactivate(key string) (STATUSCODE, error) {
 
 	if has {
 		entry.IP = ""
-		entry.MAC = ""
+		entry.CpuId = ""
 		eg.Update(entry)
 
 		return OK, nil

@@ -19,10 +19,10 @@ func (s *streamService) Auth(srv auth_service.AuthStream_AuthServer) error {
 
 		key := req.GetKey()
 		ipaddress := req.GetIpaddress()
-		macaddress := req.GetMacaddress()
+		cpuId := req.GetCpuId()
 		timestamp := req.GetTimestamp()
 
-		code, _ := postgresql.Login(key, ipaddress, macaddress, timestamp)
+		code, _ := postgresql.Login(key, ipaddress, cpuId, timestamp)
 		srv.Send(&auth_service.StreamAuthResponse{
 			Code:    int64(code),
 			Message: postgresql.STATUSMAP[code],
@@ -61,8 +61,10 @@ func (s *streamService) Polling(srv auth_service.AuthStream_PollingServer) error
 		}
 
 		key := req.GetKey()
+		ipaddress := req.GetIpaddress()
+		cpuId := req.GetCpuId()
 
-		code, _ := postgresql.Deactivate(key)
+		code, _ := postgresql.Polling(key, ipaddress, cpuId)
 		srv.Send(&auth_service.StreamPollingResponse{
 			Code:    int64(code),
 			Message: postgresql.STATUSMAP[code],

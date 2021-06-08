@@ -1,11 +1,11 @@
 package postgresql
 
-func Polling(key, ip, mac string) (STATUSCODE, error) {
+func Polling(key, ip, cpuId string) (STATUSCODE, error) {
 
 	entry := &keyDetails{
-		Key: key,
-		IP:  ip,
-		MAC: mac,
+		Key:   key,
+		IP:    ip,
+		CpuId: cpuId,
 	}
 
 	has, err := eg.Get(entry)

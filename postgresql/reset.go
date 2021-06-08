@@ -17,9 +17,9 @@ func Reset(key, email string) (STATUSCODE, error) {
 			return REQUIRE_ACTIVATION, nil
 		default:
 			keyDetail := &keyDetails{
-				Key: key,
-				IP:  "",
-				MAC: "",
+				Key:   key,
+				IP:    "",
+				CpuId: "",
 			}
 			eg.Update(keyDetail)
 

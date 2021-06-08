@@ -53,7 +53,7 @@ type keyDetails struct {
 	Id            int64
 	Key           string
 	IP            string
-	MAC           string
+	CpuId         string
 	LastLoginTime time.Time
 }
 

@@ -6,7 +6,7 @@ option go_package = "auth;auth_service";
 message StreamAuthRequest{
     string key = 1;
     string ipaddress = 2;
-    string macaddress =3;
+    string cpuId =3;
     string timestamp = 4;
 }
 
@@ -19,7 +19,7 @@ message StreamAuthResponse {
 message StreamDeactivateRequest{
     string key = 1;
     string ipaddress = 2;
-    string macaddress =3;
+    string cpuId =3;
     string timestamp = 4;
 }
 
@@ -31,7 +31,7 @@ message StreamDeactivateResponse{
 message StreamPollingRequest{
     string key = 1;
     string ipaddress = 2;
-    string macaddress =3;
+    string cpuId =3;
     string timestamp = 4;
 }
 

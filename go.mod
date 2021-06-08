@@ -9,6 +9,7 @@ require (
 	github.com/agrison/go-tablib v0.0.0-20160310143025-4930582c22ee // indirect
 	github.com/agrison/mxj v0.0.0-20160310142625-1269f8afb3b4 // indirect
 	github.com/bndr/gotabulate v1.1.2 // indirect
+	github.com/brianvoe/gofakeit/v6 v6.4.1 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/garyburd/redigo v1.6.2 // indirect
 	github.com/gogf/gf v1.16.2 // indirect

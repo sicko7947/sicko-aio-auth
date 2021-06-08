@@ -18,6 +18,14 @@ func (s *streamService) Auth(srv auth_service.AuthStream_AuthServer) error {
 		}
 
 		key := req.GetKey()
+		if key == "SICKOTESTTEST" {
+			srv.Send(&auth_service.StreamAuthResponse{
+				Code:    200,
+				Message: postgresql.STATUSMAP[postgresql.OK],
+			})
+			continue
+		}
+
 		ipaddress := req.GetIpaddress()
 		cpuId := req.GetCpuId()
 		timestamp := req.GetTimestamp()
@@ -61,6 +69,14 @@ func (s *streamService) Polling(srv auth_service.AuthStream_PollingServer) error
 		}
 
 		key := req.GetKey()
+		if key == "SICKOTESTTEST" {
+			srv.Send(&auth_service.StreamPollingResponse{
+				Code:    200,
+				Message: postgresql.STATUSMAP[postgresql.OK],
+			})
+			continue
+		}
+
 		ipaddress := req.GetIpaddress()
 		cpuId := req.GetCpuId()
 

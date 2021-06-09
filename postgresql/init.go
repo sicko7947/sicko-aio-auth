@@ -23,7 +23,11 @@ func init() {
 
 	conns := []string{
 		"postgres://sickomcd:tWn8sSheAWHC@131.153.76.114:5432/keymainv2?sslmode=disable;", // 第一个默认是master
-		"postgres://sickomcd:tWn8sSheAWHC@131.153.76.114:5432/keymainv3?sslmode=disable;", // 第二个开始都是slave
+		"postgres://sickomcd:tWn8sSheAWHC@131.153.76.114:5432/subdb1?sslmode=disable;",    // 第二个开始都是slave
+		"postgres://sickomcd:tWn8sSheAWHC@131.153.76.114:5432/subdb2?sslmode=disable;",
+		"postgres://sickomcd:tWn8sSheAWHC@131.153.76.114:5432/subdb3?sslmode=disable;",
+		"postgres://sickomcd:tWn8sSheAWHC@131.153.76.114:5432/subdb4?sslmode=disable;",
+		"postgres://sickomcd:tWn8sSheAWHC@131.153.76.114:5432/subdb5?sslmode=disable;",
 	}
 	eg, err = xorm.NewEngineGroup("postgres", conns, xorm.LeastConnPolicy())
 	if err != nil {

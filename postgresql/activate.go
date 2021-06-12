@@ -21,7 +21,7 @@ func Activate(key string, email string) (STATUSCODE, error) {
 			entry.Status = 1
 			entry.ActivateTime = time.Now()
 
-			eg.Update(entry)
+			eg.ID(entry.Id).Update(entry)
 			eg.Insert(&keyDetails{
 				Key: key,
 			})

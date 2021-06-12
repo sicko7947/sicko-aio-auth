@@ -21,7 +21,7 @@ func Reset(key, email string) (STATUSCODE, error) {
 				IP:    "",
 				CpuId: "",
 			}
-			eg.Update(keyDetail)
+			eg.ID(entry.Id).Update(keyDetail)
 
 			return OK, nil
 		}

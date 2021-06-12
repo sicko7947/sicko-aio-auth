@@ -1,6 +1,8 @@
 package postgresql
 
-import "time"
+import (
+	"time"
+)
 
 func Login(key, ip, cpuId, timestamp string) (STATUSCODE, error) {
 
@@ -8,7 +10,7 @@ func Login(key, ip, cpuId, timestamp string) (STATUSCODE, error) {
 		Key: key,
 	}
 
-	has, err := eg.Get(entry)
+	has, err := eg.Limit(1).Get(entry)
 	if err != nil {
 		return DATABASE_ERROR, err
 	}
@@ -21,12 +23,12 @@ func Login(key, ip, cpuId, timestamp string) (STATUSCODE, error) {
 			entry.LastLoginTime = time
 			entry.IP = ip
 			entry.CpuId = cpuId
-			eg.Update(entry)
+			eg.ID(entry.Id).Update(entry)
 
 			return OK, nil
 		case ip == entry.IP && cpuId == entry.CpuId:
 			entry.LastLoginTime = time
-			eg.Update(entry)
+			eg.ID(entry.Id).Update(entry)
 
 			return OK, nil
 		case ip != entry.IP, cpuId != entry.CpuId:

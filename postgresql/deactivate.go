@@ -14,7 +14,7 @@ func Deactivate(key string) (STATUSCODE, error) {
 	if has {
 		entry.IP = ""
 		entry.CpuId = ""
-		eg.Update(entry)
+		eg.ID(entry.Id).Update(entry)
 
 		return OK, nil
 	}

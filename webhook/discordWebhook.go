@@ -1,4 +1,4 @@
-package webhook
+package discordwebhook
 
 import (
 	"bytes"
@@ -98,6 +98,18 @@ var (
 		"https://discord.com/api/webhooks/827595730058870804/NkRA8Y9QPorWjwShun38xHn2N0UEV1NOuwfTqrJrmdh1Fa_sAapKFrIoxM-m1GaECPdk",
 		"https://discord.com/api/webhooks/827595744562249728/vY77xeO1tFJPonPsCBDk6oyf8GyjR7T63gKBkvrkm1-h6AtyM0fqpW181EY0pEi2zybp",
 		"https://discord.com/api/webhooks/827595759456092230/fa9evP4eHNt5iLyUxCbGP2GlVMtZbHFvVdXQbFM_rHMmYRDPeiSYgwd1br_ZMA5EZTFU",
+	}
+	webhooks_SSENSE = []string{
+		"https://discord.com/api/webhooks/853644919034216458/_s-hxFYm1HO5yez27MtNpB8WNvc01I9QcPd22En-18Om8HHy4KlQqAWnyLpTrSqd9MZ8",
+		"https://discord.com/api/webhooks/853645171904086076/27niQUR1YawaVKJ-LZNuWJfcO_IS83ucPKDpeJpm698jLWwEyxXLa-nlnsaAnk7R3rtU",
+		"https://discord.com/api/webhooks/853645202082103327/VEKiofNMo-4oMlub3HKnwTuM2Ky4NK84_7KHFTq2jUVnzemZ7jzsZ2MSVR1kbVmN-zry",
+		"https://discord.com/api/webhooks/853645221119393832/a8jxXRW9AUIu3Ng6ichSuHJ5GHd6XM2sbhyT589IlKkBQJQKU1hvwu4yEer5YYIk1R-U",
+		"https://discord.com/api/webhooks/853645240711381027/T3jFb3r-cYD0WTP74lqRO04DIh2UhQjT7J3TBdRw0JkvXERZZgAZwSqmDwcOHei0hazE",
+		"https://discord.com/api/webhooks/853645265914036244/iTFmV-At-MqsqltOyYjO_QM0TQGQzK976kl2g02uvEAzWFNOkdqc0Dmv1uH48wX4LFDO",
+		"https://discord.com/api/webhooks/853645299557466122/S9ApYktYYEOU0W25zMTIbDUw-Jik_6QRe5D1uX8ez-2UbkVHtzFEEFApvQql3M0-F1g0",
+		"https://discord.com/api/webhooks/853645320416002078/8YvFCuyXE5D7JDybHx6o1WXWrFLBKhpDZuUBq-yAmWyPP4VrX7q6DogYWaxa_OpE-IxN",
+		"https://discord.com/api/webhooks/853645340145483776/tnaCzWG62987QRtEEI0IulVtHLXUVWpu2kGF9w_7ZklrBgsf8QafjXsx0z1Lhrj2UIhR",
+		"https://discord.com/api/webhooks/853645361989156864/J90hdO3RRtaw30rO49AuHtcMh_KcpK_2yikS1ZODKr5xc8UXPq7RVj40u5y_BbefmPV0",
 	}
 )
 

@@ -7,7 +7,7 @@ import (
 	"github.com/sicko7947/sicko-aio-auth/models"
 	"github.com/sicko7947/sicko-aio-auth/postgresql"
 	auth_service "github.com/sicko7947/sicko-aio-auth/proto/auth"
-	"github.com/sicko7947/sicko-aio-auth/utils/webhook"
+	discordwebhook "github.com/sicko7947/sicko-aio-auth/webhook"
 )
 
 var (
@@ -35,21 +35,21 @@ func init() {
 			if nikeLegayQueuedWebhooks.Size() > 0 {
 				if legacyItemObj := nikeLegayQueuedWebhooks.Pop(); legacyItemObj != nil {
 					legacyItem := legacyItemObj.(*models.SuccessItem)
-					webhook.SendLegacyNikePublicSuccess(legacyItem)
+					discordwebhook.SendLegacyNikePublicSuccess(legacyItem)
 				}
 			}
 
 			if nikeAcoQueuedWebhooks.Size() > 0 {
 				if acoItemObj := nikeAcoQueuedWebhooks.Pop(); acoItemObj != nil {
 					acoItem := acoItemObj.(*models.SuccessItem)
-					webhook.SendACONikePublicSuccess(acoItem)
+					discordwebhook.SendACONikePublicSuccess(acoItem)
 				}
 			}
 
 			if pacsunQueuedWebhooks.Size() > 0 {
 				if itemObj := pacsunQueuedWebhooks.Pop(); itemObj != nil {
 					item := itemObj.(*models.SuccessItem)
-					webhook.SendPacsunPublicSuccess(item)
+					discordwebhook.SendPacsunPublicSuccess(item)
 				}
 			}
 		}

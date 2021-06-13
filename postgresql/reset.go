@@ -1,10 +1,10 @@
 package postgresql
 
-func Reset(key, email string) (STATUSCODE, error) {
-
+func Reset(key, email, discordID string) (STATUSCODE, error) {
 	entry := &keyMain{
-		Key:   key,
-		Email: email,
+		Key:       key,
+		Email:     email,
+		DiscordID: discordID,
 	}
 	has, err := eg.Get(entry)
 	if err != nil {

@@ -16,7 +16,8 @@ func activate(r *ghttp.Request) {
 		return
 	}
 
-	r.Response.WriteJsonExit(map[string]int64{
-		"status": int64(code),
+	r.Response.WriteJsonExit(map[string]interface{}{
+		"code":   int64(code),
+		"result": postgresql.STATUSMAP[code],
 	})
 }

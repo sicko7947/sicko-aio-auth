@@ -1,6 +1,8 @@
 package restfulhandler
 
 import (
+	"fmt"
+
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/sicko7947/sicko-aio-auth/postgresql"
 )
@@ -16,8 +18,8 @@ func activate(r *ghttp.Request) {
 		return
 	}
 
-	r.Response.WriteJsonExit(map[string]interface{}{
-		"code":   int64(code),
+	r.Response.WriteJsonExit(map[string]string{
+		"code":   fmt.Sprint(code),
 		"result": postgresql.STATUSMAP[code],
 	})
 }

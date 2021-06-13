@@ -21,6 +21,8 @@ func Activate(key, email, discordID string) (STATUSCODE, error) {
 			entry.Status = 1
 			entry.DiscordID = discordID
 			entry.ActivateTime = time.Now()
+			entry.ExpireTime = time.Now().Add(5184000 * time.Second)
+			entry.KeyType = "Renewal"
 
 			eg.Main().ID(entry.Id).Update(entry)
 			eg.Main().Insert(&keyDetails{

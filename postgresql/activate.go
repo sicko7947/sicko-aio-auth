@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-func Activate(key string, email string) (STATUSCODE, error) {
+func Activate(key, email, discordID string) (STATUSCODE, error) {
 
 	entry := &keyMain{
 		Key: key,
@@ -19,6 +19,7 @@ func Activate(key string, email string) (STATUSCODE, error) {
 		case 0:
 			entry.Email = email
 			entry.Status = 1
+			entry.DiscordID = discordID
 			entry.ActivateTime = time.Now()
 
 			eg.ID(entry.Id).Update(entry)

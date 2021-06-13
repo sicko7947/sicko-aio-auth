@@ -10,6 +10,7 @@ func init() {
 	s.Group("/", func(group *ghttp.RouterGroup) {
 		group.Middleware(MiddlewareCORS)
 
+		group.POST("/auth/activate", activate)
 		group.POST("/auth/reset", reset)
 	})
 	s.EnableHTTPS(`/root/auth/auth.sickoaio.com.crt`, `/root/auth/auth.sickoaio.com.key`)

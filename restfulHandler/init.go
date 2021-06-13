@@ -24,7 +24,7 @@ func portInUse(port int) bool {
 	return false
 }
 
-func init() {
+func BackendServer() {
 	fmt.Println(portInUse(28888))
 	if !portInUse(28888) {
 		s := g.Server()

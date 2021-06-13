@@ -6,7 +6,7 @@ func Reset(key, email, discordID string) (STATUSCODE, error) {
 		Email:     email,
 		DiscordID: discordID,
 	}
-	has, err := eg.Get(entry)
+	has, err := eg.Main().Get(entry)
 	if err != nil {
 		return DATABASE_ERROR, err
 	}
@@ -21,7 +21,7 @@ func Reset(key, email, discordID string) (STATUSCODE, error) {
 				IP:    "",
 				CpuId: "",
 			}
-			eg.ID(entry.Id).Update(keyDetail)
+			eg.Main().ID(entry.Id).Update(keyDetail)
 
 			return OK, nil
 		}

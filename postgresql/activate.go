@@ -9,7 +9,7 @@ func Activate(key, email, discordID string) (STATUSCODE, error) {
 	entry := &keyMain{
 		Key: key,
 	}
-	has, err := eg.Get(entry)
+	has, err := eg.Main().Get(entry)
 	if err != nil {
 		return DATABASE_ERROR, err
 	}
@@ -22,8 +22,8 @@ func Activate(key, email, discordID string) (STATUSCODE, error) {
 			entry.DiscordID = discordID
 			entry.ActivateTime = time.Now()
 
-			eg.ID(entry.Id).Update(entry)
-			eg.Insert(&keyDetails{
+			eg.Main().ID(entry.Id).Update(entry)
+			eg.Main().Insert(&keyDetails{
 				Key: key,
 			})
 

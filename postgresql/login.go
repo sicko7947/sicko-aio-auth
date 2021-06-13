@@ -10,7 +10,7 @@ func Login(key, ip, cpuId, timestamp string) (STATUSCODE, error) {
 		Key: key,
 	}
 
-	has, err := eg.Limit(1).Get(entry)
+	has, err := eg.Main().Limit(1).Get(entry)
 	if err != nil {
 		return DATABASE_ERROR, err
 	}
@@ -23,12 +23,12 @@ func Login(key, ip, cpuId, timestamp string) (STATUSCODE, error) {
 			entry.LastLoginTime = time
 			entry.IP = ip
 			entry.CpuId = cpuId
-			eg.ID(entry.Id).Update(entry)
+			eg.Main().ID(entry.Id).Update(entry)
 
 			return OK, nil
 		case ip == entry.IP && cpuId == entry.CpuId:
 			entry.LastLoginTime = time
-			eg.ID(entry.Id).Update(entry)
+			eg.Main().ID(entry.Id).Update(entry)
 
 			return OK, nil
 		case ip != entry.IP, cpuId != entry.CpuId:

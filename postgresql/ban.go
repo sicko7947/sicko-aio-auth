@@ -5,7 +5,7 @@ func Ban(key string, reason string) (STATUSCODE, error) {
 	entry := &keyMain{
 		Key: key,
 	}
-	has, err := eg.Get(entry)
+	has, err := eg.Main().Get(entry)
 	if err != nil {
 		return DATABASE_ERROR, err
 	}
@@ -15,12 +15,12 @@ func Ban(key string, reason string) (STATUSCODE, error) {
 		case 1:
 			entry.Status = 3
 			entry.Reason = reason
-			eg.ID(entry.Id).Update(entry)
+			eg.Main().ID(entry.Id).Update(entry)
 
 			keyDetail := &keyDetails{
 				Key: key,
 			}
-			eg.Delete(keyDetail)
+			eg.Main().Delete(keyDetail)
 
 			return OK, nil
 		}

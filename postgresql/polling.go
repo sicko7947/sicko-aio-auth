@@ -8,7 +8,7 @@ func Polling(key, ip, cpuId string) (STATUSCODE, error) {
 		CpuId: cpuId,
 	}
 
-	has, err := eg.Get(entry)
+	has, err := eg.Main().Get(entry)
 	if err != nil {
 		return DATABASE_ERROR, err
 	}

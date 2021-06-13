@@ -6,7 +6,7 @@ func Deactivate(key string) (STATUSCODE, error) {
 		Key: key,
 	}
 
-	has, err := eg.Get(entry)
+	has, err := eg.Main().Get(entry)
 	if err != nil {
 		return DATABASE_ERROR, err
 	}
@@ -14,7 +14,7 @@ func Deactivate(key string) (STATUSCODE, error) {
 	if has {
 		entry.IP = ""
 		entry.CpuId = ""
-		eg.ID(entry.Id).Update(entry)
+		eg.Main().ID(entry.Id).Update(entry)
 
 		return OK, nil
 	}

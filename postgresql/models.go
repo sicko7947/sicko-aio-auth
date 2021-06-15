@@ -28,7 +28,7 @@ var (
 		CANCELLED:              "The key has Suspended.",
 		ACTIVATED:              "This key is activated.",
 		KEY_ERROR:              "Key Error.",
-		LOGGED_IN_OTHER_DEVICE: "The key is already logged in on other deviceS.",
+		LOGGED_IN_OTHER_DEVICE: "The key is already logged in on other devices.",
 		NO_ACCESS:              "The key has no access.",
 		KEY_STATUS_NOT_MATCH:   "The key status doesn't match the record.",
 		WRONG_CREDENTIALS:      "Wrong KEY or Email value",

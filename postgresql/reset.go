@@ -17,12 +17,15 @@ func Reset(key, email, discordID string) (STATUSCODE, error) {
 			return REQUIRE_ACTIVATION, nil
 		default:
 			keyDetail := &keyDetails{
-				Key:   key,
-				IP:    "",
-				CpuId: "",
+				Key: key,
 			}
-			eg.Main().ID(entry.Id).Update(keyDetail)
 
+			if has, _ := eg.Main().Get(keyDetail); has {
+				eg.Main().Table(new(keyDetails)).ID(keyDetail.Id).Update(map[string]interface{}{
+					"IP":    "",
+					"CpuId": "",
+				})
+			}
 			return OK, nil
 		}
 	}

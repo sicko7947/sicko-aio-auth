@@ -28,28 +28,28 @@ func init() {
 			if successDBQueue.Size() > 0 {
 				if obj := successDBQueue.Pop(); obj != nil {
 					item := obj.(*models.SuccessItem)
-					postgresql.InsertSuccess(item)
+					go postgresql.InsertSuccess(item)
 				}
 			}
 
 			if nikeLegayQueuedWebhooks.Size() > 0 {
 				if legacyItemObj := nikeLegayQueuedWebhooks.Pop(); legacyItemObj != nil {
 					legacyItem := legacyItemObj.(*models.SuccessItem)
-					discordwebhook.SendLegacyNikePublicSuccess(legacyItem)
+					go discordwebhook.SendLegacyNikePublicSuccess(legacyItem)
 				}
 			}
 
 			if nikeAcoQueuedWebhooks.Size() > 0 {
 				if acoItemObj := nikeAcoQueuedWebhooks.Pop(); acoItemObj != nil {
 					acoItem := acoItemObj.(*models.SuccessItem)
-					discordwebhook.SendACONikePublicSuccess(acoItem)
+					go discordwebhook.SendACONikePublicSuccess(acoItem)
 				}
 			}
 
 			if pacsunQueuedWebhooks.Size() > 0 {
 				if itemObj := pacsunQueuedWebhooks.Pop(); itemObj != nil {
 					item := itemObj.(*models.SuccessItem)
-					discordwebhook.SendPacsunPublicSuccess(item)
+					go discordwebhook.SendPacsunPublicSuccess(item)
 				}
 			}
 		}

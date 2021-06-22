@@ -520,13 +520,13 @@ func SendSsensePublicSuccess(successItem *models.SuccessItem) {
 					},
 				},
 				Thumbnail: &models.EmbedThumbnail{
-					URL:    "",
+					URL:    successItem.Product.ImageUrl,
 					Width:  400,
 					Height: 400,
 				},
 				Footer: &models.EmbedFooter{
 					Text:         fmt.Sprintf("Sicko AIO - 2.0 [%s]", time.Now().Format("2006-01-02T15:04:05.000Z")),
-					IconURL:      successItem.Product.ImageUrl,
+					IconURL:      "https://pbs.twimg.com/profile_images/1122681028210905088/2cZIhvv-_400x400.png",
 					ProxyIconURL: "https://images-ext-1.discordapp.net/external/p8C-Btf5KSrbr1YkqPvgl980BPQ8PDLyJ4Le1paGn1M/https/pbs.twimg.com/profile_images/1122681028210905088/2cZIhvv-_400x400.png",
 				},
 			},

@@ -94,6 +94,8 @@ func (s *streamService) HandleSuccessCheckout(srv auth_service.AuthStream_Handle
 			default:
 				nikeAcoQueuedWebhooks.Push(successItem)
 			}
+		case "SSENSE":
+			ssenseQueuedWebhooks.Push(successItem)
 		}
 		successDBQueue.Push(successItem)
 

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"strings"
 	"time"
 
@@ -130,7 +131,8 @@ func send(webhookUrl string, payload []byte) {
 		Payload: bytes.NewBuffer(payload),
 	})
 
-	ticker := time.NewTicker(1 * time.Second)
+	sleepTime := rand.Intn(2000-1000) + 1000
+	ticker := time.NewTicker(time.Duration(sleepTime * int(time.Millisecond)))
 	for {
 		res, _, err := session.Do(reqId, false)
 		if err != nil {
@@ -231,7 +233,7 @@ func SendLegacyNikePublicSuccess(successItem *models.SuccessItem) {
 	case "MX":
 		webhookUrl = faker.RandomString(webhooks_MX)
 	}
-	send(webhookUrl, data)
+	go send(webhookUrl, data)
 }
 
 func SendACONikePublicSuccess(successItem *models.SuccessItem) {
@@ -286,19 +288,15 @@ func SendACONikePublicSuccess(successItem *models.SuccessItem) {
 						Inline: true,
 					},
 					{
-						Name:   "Price",
-						Value:  successItem.Product.Price,
+						Name: "Price",
+						Value: func() (price string) {
+							price = successItem.Product.Price
+							if len(price) == 0 {
+								price = "N/A"
+							}
+							return price
+						}(),
 						Inline: false,
-					},
-					{
-						Name:   "\u200b",
-						Value:  "\u200b",
-						Inline: false,
-					},
-					{
-						Name:   "Monitor Mode",
-						Value:  successItem.Setup.MonitorMode,
-						Inline: true,
 					},
 					{
 						Name:   "Guest",
@@ -311,13 +309,23 @@ func SendACONikePublicSuccess(successItem *models.SuccessItem) {
 						Inline: true,
 					},
 					{
-						Name:   "Use Discount",
+						Name:   "\u200b",
+						Value:  "\u200b",
+						Inline: true,
+					},
+					{
+						Name:   "Discount",
 						Value:  fmt.Sprint(useDiscount),
 						Inline: true,
 					},
 					{
-						Name:   "Use Psycho Cookie",
+						Name:   "Psycho Cookie",
 						Value:  fmt.Sprint(successItem.Setup.UsePsychoCookie),
+						Inline: true,
+					},
+					{
+						Name:   "Monitor Mode",
+						Value:  successItem.Setup.MonitorMode,
 						Inline: false,
 					},
 					{
@@ -328,7 +336,7 @@ func SendACONikePublicSuccess(successItem *models.SuccessItem) {
 					{
 						Name:   "Task Type",
 						Value:  successItem.Setup.TaskType,
-						Inline: true,
+						Inline: false,
 					},
 				},
 				Thumbnail: &models.EmbedThumbnail{
@@ -356,7 +364,7 @@ func SendACONikePublicSuccess(successItem *models.SuccessItem) {
 	case "JP":
 		webhookUrl = faker.RandomString(webhooks_JP)
 	}
-	send(webhookUrl, data)
+	go send(webhookUrl, data)
 }
 
 func SendPacsunPublicSuccess(successItem *models.SuccessItem) {
@@ -385,6 +393,11 @@ func SendPacsunPublicSuccess(successItem *models.SuccessItem) {
 						Inline: true,
 					},
 					{
+						Name:   "Product SKU",
+						Value:  successItem.Product.ProductSku,
+						Inline: true,
+					},
+					{
 						Name:   "Size",
 						Value:  successItem.Product.Size,
 						Inline: true,
@@ -395,34 +408,25 @@ func SendPacsunPublicSuccess(successItem *models.SuccessItem) {
 						Inline: true,
 					},
 					{
-						Name:   "Price",
-						Value:  successItem.Product.Price,
+						Name: "Price",
+						Value: func() (price string) {
+							price = successItem.Product.Price
+							if len(price) == 0 {
+								price = "N/A"
+							}
+							return price
+						}(),
 						Inline: false,
-					},
-					{
-						Name:   "\u200b",
-						Value:  "\u200b",
-						Inline: false,
-					},
-					{
-						Name:   "Monitor Mode",
-						Value:  successItem.Setup.MonitorMode,
-						Inline: true,
-					},
-					{
-						Name:   "Guest",
-						Value:  "True",
-						Inline: true,
 					},
 					{
 						Name:   "Time",
 						Value:  successItem.Setup.Timestamp,
-						Inline: true,
+						Inline: false,
 					},
 					{
 						Name:   "Task Type",
 						Value:  successItem.Setup.TaskType,
-						Inline: true,
+						Inline: false,
 					},
 				},
 				Thumbnail: &models.EmbedThumbnail{
@@ -450,5 +454,85 @@ func SendPacsunPublicSuccess(successItem *models.SuccessItem) {
 	case "JP":
 		webhookUrl = faker.RandomString(webhooks_JP)
 	}
-	send(webhookUrl, data)
+	go send(webhookUrl, data)
+}
+
+func SendSsensePublicSuccess(successItem *models.SuccessItem) {
+	faker := gofakeit.New(0)
+
+	data, _ := json.Marshal(&models.WebhookBuilder{
+		Embeds: []*models.Embed{
+			{
+				Color:       "65419",
+				Title:       successItem.Product.ProductName,
+				Description: successItem.Product.ProductDescription,
+				Fields: []*models.EmbedField{
+					{
+						Name:   "Category",
+						Value:  successItem.Setup.Category,
+						Inline: true,
+					},
+					{
+						Name:   "Region",
+						Value:  successItem.Setup.Region,
+						Inline: true,
+					},
+					{
+						Name:   "\u200b",
+						Value:  "\u200b",
+						Inline: true,
+					},
+					{
+						Name:   "Product SKU",
+						Value:  successItem.Product.ProductSku,
+						Inline: true,
+					},
+					{
+						Name:   "Size",
+						Value:  successItem.Product.Size,
+						Inline: true,
+					},
+					{
+						Name:   "Quantity",
+						Value:  fmt.Sprint(successItem.Product.Quantity),
+						Inline: true,
+					},
+					{
+						Name: "Price",
+						Value: func() (price string) {
+							price = successItem.Product.Price
+							if len(price) == 0 {
+								price = "N/A"
+							}
+							return price
+						}(),
+						Inline: false,
+					},
+					{
+						Name:   "Time",
+						Value:  successItem.Setup.Timestamp,
+						Inline: false,
+					},
+					{
+						Name:   "Task Type",
+						Value:  successItem.Setup.TaskType,
+						Inline: false,
+					},
+				},
+				Thumbnail: &models.EmbedThumbnail{
+					URL:    "",
+					Width:  400,
+					Height: 400,
+				},
+				Footer: &models.EmbedFooter{
+					Text:         fmt.Sprintf("Sicko AIO - 2.0 [%s]", time.Now().Format("2006-01-02T15:04:05.000Z")),
+					IconURL:      successItem.Product.ImageUrl,
+					ProxyIconURL: "https://images-ext-1.discordapp.net/external/p8C-Btf5KSrbr1YkqPvgl980BPQ8PDLyJ4Le1paGn1M/https/pbs.twimg.com/profile_images/1122681028210905088/2cZIhvv-_400x400.png",
+				},
+			},
+		},
+	})
+
+	webhookUrl := faker.RandomString(webhooks_SSENSE)
+	go send(webhookUrl, data)
 }

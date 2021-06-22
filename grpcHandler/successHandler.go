@@ -15,6 +15,7 @@ var (
 	nikeLegayQueuedWebhooks *gqueue.Queue
 	nikeAcoQueuedWebhooks   *gqueue.Queue
 	pacsunQueuedWebhooks    *gqueue.Queue
+	ssenseQueuedWebhooks    *gqueue.Queue
 )
 
 func init() {
@@ -22,6 +23,7 @@ func init() {
 	nikeLegayQueuedWebhooks = gqueue.New()
 	nikeAcoQueuedWebhooks = gqueue.New()
 	pacsunQueuedWebhooks = gqueue.New()
+	ssenseQueuedWebhooks = gqueue.New()
 
 	go func() {
 		for {
@@ -50,6 +52,13 @@ func init() {
 				if itemObj := pacsunQueuedWebhooks.Pop(); itemObj != nil {
 					item := itemObj.(*models.SuccessItem)
 					go discordwebhook.SendPacsunPublicSuccess(item)
+				}
+			}
+
+			if ssenseQueuedWebhooks.Size() > 0 {
+				if itemObj := ssenseQueuedWebhooks.Pop(); itemObj != nil {
+					item := itemObj.(*models.SuccessItem)
+					go discordwebhook.SendSsensePublicSuccess(item)
 				}
 			}
 		}

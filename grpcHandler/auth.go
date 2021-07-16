@@ -18,7 +18,7 @@ func (s *streamService) Auth(srv auth_service.AuthStream_AuthServer) error {
 		}
 
 		key := req.GetKey()
-		if key == "SICKOTESTTEST" {
+		if key == "SICKOTESTTEST" || key == "SICKO-UGYTG-ATNYZ-JVF9A-YEJJ5" {
 			srv.Send(&auth_service.StreamAuthResponse{
 				Code:    200,
 				Message: postgresql.STATUSMAP[postgresql.OK],

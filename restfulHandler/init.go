@@ -18,7 +18,6 @@ func BackendServer(port int64) {
 	})
 	s.EnableHTTPS(`/root/auth/auth.sickoaio.com.crt`, `/root/auth/auth.sickoaio.com.key`)
 	s.SetHTTPSPort(28888)
-	s.EnablePProf()
 	s.Run()
 }
 

@@ -69,7 +69,7 @@ func (s *streamService) Polling(srv auth_service.AuthStream_PollingServer) error
 		}
 
 		key := req.GetKey()
-		if key == "SICKOTESTTEST" {
+		if key == "SICKOTESTTEST" || key == "SICKO-UGYTG-ATNYZ-JVF9A-YEJJ5" {
 			srv.Send(&auth_service.StreamPollingResponse{
 				Code:    200,
 				Message: postgresql.STATUSMAP[postgresql.OK],

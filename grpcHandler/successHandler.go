@@ -2,6 +2,7 @@ package grpcHandler
 
 import (
 	"io"
+	"time"
 
 	"github.com/gogf/gf/container/gqueue"
 	"github.com/sicko7947/sicko-aio-auth/models"
@@ -26,6 +27,7 @@ func init() {
 	ssenseQueuedWebhooks = gqueue.New()
 
 	go func() {
+		ticker := time.NewTicker(100 * time.Millisecond)
 		for {
 			if successDBQueue.Size() > 0 {
 				if obj := successDBQueue.Pop(); obj != nil {
@@ -61,6 +63,7 @@ func init() {
 					go discordwebhook.SendSsensePublicSuccess(item)
 				}
 			}
+			<-ticker.C
 		}
 	}()
 }
